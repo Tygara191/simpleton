@@ -38,15 +38,20 @@ class Language {
 
         if($this->getSelectedLanguage() == false){
             // Header call here
-
-            // If header call also fails
-            $this->currentLang = $this->defLang;
+            $header_lang = $this->getLanguageFromHeaders();
+            if($header_lang != false){
+                if($this->isValidLanguageKey($header_lang)){
+                    $this->currentLang = $this->loadLanguage($header_lang);
+                }
+            }
         }else{
             if($this->isValidLanguageKey($this->getSelectedLanguage())){
                 $this->currentLang = $this->loadLanguage($this->getSelectedLanguage());
-            }else{
-                $this->currentLang = $this->defLang;
             }
+        }
+        // Both our calls failed so we set currentLang to be the default lang
+        if(!isset($this->currentLang)){
+            $this->currentLang = $this->defLang;
         }
 	}
 
@@ -75,7 +80,6 @@ class Language {
             die(sprintf(Language::ERROR_NO_FILE, $key, $lang_file_path));
     }
 
-
     /**
      * @return false | string
      */
@@ -83,8 +87,12 @@ class Language {
         return isset($_COOKIE['lang']) ? $_COOKIE['lang'] : false;
     }
 
+    /**
+     * @return bool|string
+     */
     private function getLanguageFromHeaders(){
         // TODO: Make this :)
+        return false;
     }
 
     private function setSelectedLanguage(){
