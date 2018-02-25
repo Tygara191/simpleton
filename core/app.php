@@ -17,6 +17,7 @@ class Application{
     public $db;
     public $lang;
     public $auth;
+    public $validation;
 
     /**
      * Application constructor.

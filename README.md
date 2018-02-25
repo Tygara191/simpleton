@@ -21,10 +21,18 @@ Note: This is the only file from the `core` folder that you can include througho
 Initializing the app: 
 
 ```php
-<?php include 'core/app.php';
+<?php
+// Always include the application first!!
+include 'core/app.php';
 $app = new Application();
 
-Your business logic goes here...
+// Your business logic goes here...
+// Here you have access to and should use the 5 core toolkits of Simpleton:
+$app->config;
+$app->auth;
+$app->db;
+$app->lang;
+$app->validation;
 
 // Include all your other stuff etc
 include 'template/header.php';?>
