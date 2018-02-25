@@ -23,7 +23,7 @@ class Application{
      */
     public function __construct($unauthenticated_only=false){
 		$this->config = new Config([
-            Application::CONFIG_FILES_LOCATION.'main.php',
+            Application::CONFIG_FILES_LOCATION.'main.conf.php',
         ]);
 		$this->db = new DatabaseManager($this->config);
 		$this->lang = new Language($this->config);
