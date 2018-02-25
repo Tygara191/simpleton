@@ -7,7 +7,15 @@
  * @property PDO db
  */
 class DB {
-	public function __construct($dbopts){
+    private $config;
+
+    /**
+     * DB constructor.
+     * @param Config $config
+     */
+    public function __construct($config){
+	    $this->config = $config;
+        $dbopts = $this->config->item("dbopts");
 		try
 		{
 			$this->db = new PDO('mysql:host='.$dbopts['db_host'].';port='.$dbopts['db_port'].';dbname='.$dbopts['db_name'], $dbopts['db_user'], $dbopts['db_pass']);

@@ -10,8 +10,6 @@ class Config {
     const ERROR_FILES_INCLUDED_BUT_NO_CONFIG_FOUND = "Error: Configuration files were included, but no \$config was found in them.";
     const ERROR_ITEM_NOT_FOUND = "Error: Configuration item not defined: %s";
 
-    const CONFIG_FILES_LOCATION = BASE_PATH."/core/config/";
-
     /**
      * Config constructor.
      * @param array $config_files
@@ -37,16 +35,12 @@ class Config {
     private function loadConfigurationFiles($config_files){
         foreach($config_files as $config_file){
             if(!empty($config_file)){
-                $full_path = Config::CONFIG_FILES_LOCATION.$config_file;
-
-                if(file_exists($full_path))
-                    include($full_path);
+                if(file_exists($config_file))
+                    include($config_file);
                 else
                     die(sprintf(Config::ERROR_NO_CONFIG_FILE_FOUND, $config_file));
             }
         }
         if(isset($config)) $this->config = $config; else die(Config::ERROR_FILES_INCLUDED_BUT_NO_CONFIG_FOUND);
-
-        var_dump($this->config);
     }
 }

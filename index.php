@@ -2,6 +2,8 @@
 include 'core/app.php';
 $app = new Application();
 
+echo $app->lang->item("site_title");
+
 ?>
 <!DOCTYPE html>
 <html>
