@@ -13,5 +13,3 @@ $config['supported_languages'] = array(
 	['filename' => 'en.php', 'code' => 'en', 'label' => 'English'],
 	['filename' => 'bg.php', 'code' => 'bg', 'label' => 'Български'],
 );
-
-?>

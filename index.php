@@ -1,6 +1,6 @@
 <?php
-include 'core/app.php'
-
+include 'core/app.php';
+$app = new Application();
 
 ?>
 <!DOCTYPE html>
