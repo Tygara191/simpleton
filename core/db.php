@@ -1,6 +1,11 @@
-<?php
+<?php if(!defined("BASE_PATH")) die("Direct file access is forbidden.");
 
-/** @var \DateTime[] An array of DateTime objects. */
+
+/**
+ * Class DB
+ *
+ * @property PDO db
+ */
 class DB {
 	public function __construct($dbopts){
 		try

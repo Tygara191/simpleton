@@ -1,17 +1,46 @@
-<?php
+<?php if(!defined("BASE_PATH")) die("Direct file access is forbidden.");
 
-$config['base_url'] = "http://localhost/singleton/";
+class Config {
+    /**
+     * @var array
+     */
+    private $config;
 
-$config['dbopts']['db_host'] = "localhost";
-$config['dbopts']['db_port'] = 3306;
-$config['dbopts']['db_name'] = "analyze_me";
-$config['dbopts']['db_user'] = "root";
-$config['dbopts']['db_pass'] = "";
+    const ERROR_NO_CONFIG_FILE_FOUND = "Error: A configuration file was not found: %s";
+    const ERROR_FILES_INCLUDED_BUT_NO_CONFIG_FOUND = "Error: Configuration files were included, but no \$config was found in them.";
+    const ERROR_ITEM_NOT_FOUND = "Error: Configuration item not defined: %s";
 
-// First in line is considered the default language
-$config['supported_languages'] = array(
-	['code' => 'en', 'label' => 'Английски'],
-	['code' => 'bg', 'label' => 'Български'],
-);
+    const CONFIG_FILES_LOCATION = BASE_PATH."/config/";
 
+    /**
+     * Config constructor.
+     * @param array $config_files
+     */
+    public function __construct($config_files){
+        $this->loadConfigurationFiles($config_files);
+	}
+
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function item($key){
+        if(!isset($this->config[$key])){
+            die(sprintf(Config::ERROR_ITEM_NOT_FOUND, $key));
+        }
+        return $this->config[$key];
+    }
+
+    /**
+     * @param array $config_files
+     */
+    private function loadConfigurationFiles($config_files){
+        foreach($config_files as $config_file){
+            if(@include(Config::CONFIG_FILES_LOCATION.$config_file) == false){
+                die(sprintf(Config::ERROR_NO_CONFIG_FILE_FOUND, $config_file));
+            };
+        }
+        if(isset($config)) $this->config = $config; else die(Config::ERROR_FILES_INCLUDED_BUT_NO_CONFIG_FOUND);
+    }
+}
 ?>

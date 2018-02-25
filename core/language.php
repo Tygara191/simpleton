@@ -1,34 +1,48 @@
-<?php
-class DB {
-	public function __construct($dbopts){
-		try
-		{
-			$this->db = new PDO('mysql:host='.$dbopts['db_host'].';port='.$dbopts['db_port'].';dbname='.$dbopts['db_name'], $dbopts['db_user'], $dbopts['db_pass']);
-			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$this->db->exec("set names utf8");
-		}
-		catch (PDOException $e) 
-		{
-			$this->db = null;
-			die($e->getMessage());
-		}
+<?php if(!defined("BASE_PATH")) die("Direct file access is forbidden.");
+
+class Language {
+    private $defLang;
+    private $lang;
+
+    const ERROR_NO_LANGS_DEFINED = "Error: No languages defined. Please define some languages in config.";
+
+    /**
+     * Language constructor.
+     * @param Config $config
+     */
+    public function __construct($config){
+	    $languages = $config->item('supported_languages');
+        if(count($languages) < 1){
+            die(Language::ERROR_NO_LANGS_DEFINED);
+        }
+        $this->loadLanguage($languages, true);
 	}
 
-	public function insertWord($browser, $title,$description,$content,$site_id){
-		$query = $this->db->prepare("INSERT INTO app_analysis_wordlog (browser, title,description,content,site_id) VALUES (:browser,:title,:description,:content,:site_id)");
-		$query->bindValue(':browser',$browser);
-		$query->bindValue(':title',$title);
-		$query->bindValue(':description',$description);
-		$query->bindValue(':content',$content);
-		$query->bindValue(':site_id',$site_id);
-		return $query->execute();
-	}
-	public function selectQueues(){
-		$statement = $this->db->prepare("SELECT * FROM app_analysis_wordqueue");
-		$statement->execute();
-		return $statement->fetchAll();
-	}
+	private function loadLanguage($languages, $default=false){
+//	    include();
+//        if(){
+//
+//        }
+    }
+
+	private function getSelectedLanguage(){
+
+    }
+
+    private function getLanguageFromHeaders(){
+
+    }
+
+    private function setLanguage(){
+
+    }
+
+    private function suffixDatabaseField($fieldName){
+
+    }
+
+    private function get(){
+
+    }
 }
-
-$db = new DB();
 ?>
