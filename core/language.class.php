@@ -20,6 +20,7 @@ class Language {
     const ERROR_BAD_LANG_CONFIG = "Error: Improperly configured language <b>%s</b>. Check documentation for how to configure languages.";
     const ERROR_NO_LANG_IN_FILE = "Error: No \$lang array was found in <b>%s</b>. Please define language file as said in docs.";
     const ERROR_LANGUAGES_NOT_LOADED = "Error: For some reason the languages weren't loaded properly. Sadly that's just about all we know...";
+    const ERROR_BAD_ARGS = "Error: When calling Language::item() at <b>%s</b> on line <b>%d</b>, you have defined an incorrect number of arguments for the string <b>%s</b>";
 
     /**
      * Language constructor.
@@ -122,8 +123,20 @@ class Language {
     public function item($key){
         if(!isset($this->currentLang) || !isset($this->defLang))
             die(Language::ERROR_LANGUAGES_NOT_LOADED);
-        if(isset($this->currentLang[$key])) return $this->currentLang[$key];
-        if(isset($this->defLang[$key])) return $this->defLang[$key];
-        die(sprintf(Language::ERROR_NO_VALUE, $key, debug_backtrace()[0]['file'], debug_backtrace()[0]['line']));
+
+        $args = array_shift(func_get_args());
+
+        if(isset($this->currentLang[$key])){
+            $item = $this->currentLang[$key];
+        } elseif(isset($this->defLang[$key])) {
+             $item = $this->defLang[$key];
+        } else {
+            die(sprintf(Language::ERROR_NO_VALUE, $key, debug_backtrace()[0]['file'], debug_backtrace()[0]['line']));
+        }
+
+        $item_bound = @vsprintf($item, $args);
+
+        if(empty($item_bound)) die(sprintf(Language::ERROR_BAD_ARGS, debug_backtrace()[0]['file'], debug_backtrace()[0]['line'], $key));
+        return $item_bound;
     }
 }

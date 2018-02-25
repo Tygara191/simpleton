@@ -6,9 +6,9 @@ class Config {
      */
     private $config;
 
-    const ERROR_NO_CONFIG_FILE_FOUND = "Error: A configuration file was not found: %s";
+    const ERROR_NO_CONFIG_FILE_FOUND = "Error: A configuration file was not found: <b>%s</b>";
     const ERROR_FILES_INCLUDED_BUT_NO_CONFIG_FOUND = "Error: Configuration files were included, but no \$config was found in them.";
-    const ERROR_ITEM_NOT_FOUND = "Error: Configuration item not defined: %s";
+    const ERROR_ITEM_NOT_FOUND = "Error: Configuration item not defined: <b>%s</b> but used at <b>%s</b> on line <b>%d</b>";
 
     /**
      * Config constructor.
@@ -24,7 +24,7 @@ class Config {
      */
     public function item($key){
         if(!isset($this->config[$key])){
-            die(sprintf(Config::ERROR_ITEM_NOT_FOUND, $key));
+            die(sprintf(Config::ERROR_ITEM_NOT_FOUND, $key, debug_backtrace()[0]['file'], debug_backtrace()[0]['line']));
         }
         return $this->config[$key];
     }

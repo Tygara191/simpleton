@@ -2,13 +2,12 @@
 
 defined("BASE_PATH") or define("BASE_PATH", "D:/xampp/htdocs/simpleton");
 
-include BASE_PATH.'/core/config.php';
-
-include BASE_PATH.'/core/language.php';
-include BASE_PATH.'/core/db.php';
-include BASE_PATH.'/core/Auth.php';
-
-include BASE_PATH.'/core/gump.class.php';
+include BASE_PATH . '/core/config.class.php';
+include BASE_PATH . '/core/language.class.php';
+include BASE_PATH . '/core/databaseManager.class.php';
+include BASE_PATH . '/core/encryption.class.php';
+include BASE_PATH . '/core/auth.class.php';
+include BASE_PATH . '/core/gump.class.php';
 
 class Application{
 
@@ -21,21 +20,20 @@ class Application{
 
     /**
      * Application constructor.
-     * @param array $config
      */
     public function __construct($unauthenticated_only=false){
 		$this->config = new Config([
             Application::CONFIG_FILES_LOCATION.'main.php',
         ]);
-		$this->db = new DB($this->config);
+		$this->db = new DatabaseManager($this->config);
 		$this->lang = new Language($this->config);
-		$this->auth = new Auth($this->db, $this->config);
-
-//        $this->validation = new GUMP();
+		$this->encryption = new Encryption($this->config);
+		$this->auth = new Auth($this->config, $this->db, $this->encryption);
+        $this->validation = new GUMP();
 
         // Sanitization. See more at gump docs @ https://github.com/Wixel/GUMP
-//        $_POST = $this->validation->sanitize($_POST);
-//        $_GET = $this->validation->sanitize($_GET);
+        $_POST = $this->validation->sanitize($_POST);
+        $_GET = $this->validation->sanitize($_GET);
 
 		$this->checkAuthenticated($unauthenticated_only);
 	}

@@ -2,17 +2,8 @@
 include 'core/app.php';
 $app = new Application();
 
-echo $app->lang->item("site_title");
+include BASE_PATH."/template/header.php"; ?>
 
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Здравейте</title>
-	<meta charset="utf-8">
-</head>
-<body>
-	<h1>Hello there stranger! What brings you here?</h1>
-	sdaf
-</body>
-</html>
+<h1><?php echo $app->lang->item("site_title", 1, 2) ?></h1>
+
+<?php include BASE_PATH."/template/footer.php"; ?>

@@ -17,4 +17,6 @@ $config['supported_languages'] = array(
     'bg' => ['filename' => 'bg.php', 'label' => 'Български'],
 );
 
+$config['enc_key'] = '123';
+
 $config['languages_directory'] = BASE_PATH."/core/lang/";
