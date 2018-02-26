@@ -16,7 +16,7 @@ Read all 8ish files so you could get familiar with the codebase and what everyth
 ### Application class ###
 The application class `core/app.php` is ment to be included and **instantiated** at every page as follows:
 
-Note: This is the only file from the `core` folder that you can include throughout your files.
+Note: This is the only file from the `core` folder that you should include throughout your files.
 
 Initializing the app: 
 
@@ -150,7 +150,7 @@ How the class knows which language to show:
 
 First it looks for a `lang` cookie. The cookie should hold a key. Example of keys in our case are `en` and `bg`, which can be seen in our `main.conf.php` file.
 
-If no valid cookie is found it tries to make out the locale through headers. If that also fails, we use the default language. /The default language is the first language in the config file/
+** TODO** If no valid cookie is found it tries to make out the locale through headers. If that also fails, we use the default language. /The default language is the first language in the config file/
 
 ### Encryption ###
 Rather self explanatory.
@@ -181,3 +181,4 @@ This is not intended to be a full fledged framework and while yes, it can be use
 The project has a few TODO items:
 * Add registration functionality to the authentication class.
 * Make the language class use accepted language headers.
+* Handle file uploads.
