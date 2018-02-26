@@ -201,6 +201,10 @@ This is a basis for a very simple php project. It is designed and written with 2
 ## What Simpleton is NOT: ##
 This is not intended to be a full fledged framework and while yes, it can be used as a basis for big web apps, that is far from its intention.
 
+## Why Simpleton was made: ##
+As a person who finds himself introducing 13-14 year olds to programming and website development every year, I needed a "framework" that is easy for me to explain and easy for them to use, while providing them with tools and guidelines to build functional sites.
+Since Simpleton does not move away from "plain" php all that much (which is one if its design goals), it is a lot easier to transfer those very inexperienced developers from the flat php environment that they are comfortable with to this one, which provides them with some of the benefits of using a famework, but in a somewhat understandable manner.
+
 ## TODO: ##
 The project has a few TODO items:
 * Add registration functionality to the authentication class.
