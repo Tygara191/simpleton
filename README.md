@@ -63,7 +63,7 @@ The DatabaseManager class `core/databasemanager.class.php` is where you put all 
 By default it comes with a few predefined methods, mostly used by the auth system. These methods are intended to be used as a model or guideline when making your own methods.
 
 * `int foundRows()` - Useful when we have a query with LIMIT, this function returns the number of rows while ignoring the limit clause. Especially useful when building pagination.
-* `bool update( int $id, array $object)` - a **NON-WORKING** sample of how an update method will look, had you faced the need to make one. This method is left in so you can copy-paste and modify it a bit to get a functioning update method.
+* `bool update( int $id, array $object)` - a **NON-WORKING** sample of how an update method would look, had you faced the need to make one. This method is left in so you can copy-paste and modify it a bit to get a functioning update method.
 * `int insertUser( array $user)` - Inserts a user and returns his ID.
 * `array | false getUserById( int $id)` - gets a user by their ID or returns false if no user was found.
 * `array | false getUserByUsername( string $username)` - same as getUserById(), but based on username
